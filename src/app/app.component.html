@@ -1,9 +1,10 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
+
 <ion-footer class="app-footer" *ngIf="shouldShowFooter()">
   <ion-toolbar>
-    <ion-buttons>
+    <ion-buttons class="nav-tabs" role="tablist" aria-label="Main navigation">
       <ion-button
         class="tab-like-button"
         (click)="navigateToInbox()"
@@ -14,6 +15,7 @@
           <ion-label>Pending</ion-label>
         </div>
       </ion-button>
+
       <ion-button
         class="tab-like-button"
         (click)="navigateToOutbox()"

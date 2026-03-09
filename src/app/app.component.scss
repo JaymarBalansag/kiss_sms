@@ -1,130 +1,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Global ion-content styling to respect footer height */
 ion-content {
-  --offset-bottom: 56px; /* Adjusted for tab-like footer height */
+  --offset-bottom: 84px;
 }
 
-/* Footer styling */
 ion-footer.app-footer {
   font-family: 'Inter', sans-serif;
-  --background: #800000;
   position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
-  width: 100%;
-  z-index: 100;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
-  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 120;
+  background: transparent;
+  box-shadow: none;
+  padding: 0 0 env(safe-area-inset-bottom);
 }
 
-ion-toolbar {
-  --background: #800000;
+ion-footer.app-footer ion-toolbar {
+  --background: transparent;
   --border-style: none;
-  padding: 4px 0;
+  padding: 0;
+  min-height: 0;
 }
 
-ion-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.nav-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(17, 24, 39, 0.55);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
 }
 
 ion-button.tab-like-button {
   --background: transparent;
-  --color: #FFFFFF;
-  --border-radius: 0;
+  --background-hover: rgba(255, 255, 255, 0.08);
+  --background-activated: rgba(255, 255, 255, 0.12);
+  --ripple-color: rgba(255, 255, 255, 0.15);
+  --border-radius: 12px;
   --box-shadow: none;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --ripple-color: transparent;
-  height: 48px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-ion-button.tab-like-button:hover {
-  --color: #FFD700;
-  transform: scale(1.05);
-}
-
-ion-button.tab-like-button:active {
-  transform: scale(0.95);
+  --color: rgba(255, 255, 255, 0.84);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  margin: 0;
+  height: 46px;
+  text-transform: none;
+  transition: transform 0.18s ease;
 }
 
 ion-button.tab-like-button.active-tab {
-  --color: #FFD700;
-  position: relative;
-}
-
-ion-button.tab-like-button.active-tab::after {
-  content: '';
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40%;
-  height: 2px;
-  background: #FFD700;
-  border-radius: 1px;
+  --background: rgba(255, 255, 255, 0.95);
+  --color: #111827;
+  --box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 .button-content {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 100%;
 }
 
-ion-icon {
-  font-size: 24px;
-  height: 24px;
-  line-height: 24px;
+.button-content ion-icon {
+  font-size: 1.1rem;
 }
 
-ion-label {
+.button-content ion-label {
   font-size: 0.9rem;
-  font-weight: 600;
-  height: 24px;
-  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 @media (max-width: 600px) {
   ion-content {
-    --offset-bottom: 52px; /* Slightly smaller for mobile */
+    --offset-bottom: 78px;
   }
 
-  ion-footer.app-footer {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  ion-toolbar {
-    padding: 3px 0;
+  .nav-tabs {
+    gap: 8px;
+    padding: 7px 10px;
   }
 
   ion-button.tab-like-button {
     height: 44px;
-    --padding-start: 12px;
-    --padding-end: 12px;
   }
 
-  .button-content {
-    gap: 6px;
-  }
-
-  ion-icon {
-    font-size: 22px;
-    height: 22px;
-    line-height: 22px;
-  }
-
-  ion-label {
-    font-size: 0.85rem;
-    height: 22px;
-    line-height: 22px;
+  .button-content ion-label {
+    font-size: 0.84rem;
   }
 }

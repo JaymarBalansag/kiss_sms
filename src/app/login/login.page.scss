@@ -1,210 +1,190 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-ion-content {
-  --background: linear-gradient(135deg, #800000, #FFD700);
+:host {
+  display: block;
   font-family: 'Inter', sans-serif;
 }
 
-.container {
+ion-content {
+  --background: transparent;
+}
+
+ion-content::part(background) {
+  background:
+    linear-gradient(rgba(5, 10, 28, 0.48), rgba(5, 10, 28, 0.78)),
+    url('/assets/kiss-background.jpg') center / cover no-repeat,
+    url('/assets/background.webp') center / cover no-repeat;
+}
+
+.login-shell {
+  min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  background-image: url('/assets/background.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-}
-
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  padding: 24px;
 }
 
 .login-card {
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  background: #FFFFFF;
-  animation: scaleIn 0.8s ease-out;
-  position: relative;
-  z-index: 2;
+  width: min(460px, 100%);
+  margin: 0;
+  border-radius: 24px;
+  border: 1px solid #dfe6f0;
+  background: #fdfefe;
+  box-shadow:
+    0 24px 50px -26px rgba(0, 0, 0, 0.55),
+    0 8px 24px -12px rgba(15, 23, 42, 0.28);
+  animation: cardEnter 420ms ease-out both;
   overflow: hidden;
 }
 
-.card-header {
-  background: #800000;
-  color: #FFFFFF;
-  padding: 2.5rem 2rem;
+.card-top {
+  padding: 24px 22px 14px;
   text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  border-bottom: 1px solid #e5ebf3;
+}
+
+.app-logo {
+  width: 88px;
+  max-width: 30vw;
+  margin: 0 auto 10px;
+  display: block;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.16));
 }
 
 .header-title {
   margin: 0;
-  font-size: 1.8rem;
+  color: #0f172a;
+  font-size: 1.34rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.01em;
 }
 
-.logo-container {
-  margin-bottom: 1.5rem;
-}
-
-.app-logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 3px solid #FFD700;
-}
-
-.divider {
-  width: 60px;
-  height: 4px;
-  background: #FFD700;
-  margin: 1rem auto 0;
-  border-radius: 2px;
+.header-subtitle {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .card-body {
-  padding: 3rem 2.5rem;
+  padding: 16px 20px 22px;
 }
 
-.input-item {
-  --background: #F9FAFB;
-  --border-radius: 10px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  margin-bottom: 1.5rem;
-  border: 2px solid #E5E7EB;
-  transition: border-color 0.3s ease;
+.login-form {
+  display: grid;
+  gap: 14px;
 }
 
-.input-item:hover,
-.input-item--focused {
-  border-color: #800000;
+.form-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border: 1px solid #d5deea;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-ion-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #374151;
-  transform-origin: top left;
-  transition: all 0.3s ease;
+.form-item.ion-focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-ion-input {
-  --color: #1F2937;
-  --placeholder-color: #6B7280;
-  --placeholder-opacity: 0.8;
-  font-size: 1rem;
+.form-item ion-label {
+  color: #334155 !important;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
 }
 
-.forgot-password {
-  margin: 1rem 0 1.5rem;
-  text-align: right;
+.form-item ion-input {
+  --color: #0f172a;
+  --placeholder-color: #64748b;
+  --placeholder-opacity: 1;
+  font-size: 0.98rem;
 }
 
-.forgot-password a {
-  color: #800000;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
 }
 
-.forgot-password a:hover {
-  color: #660000;
+.forgot-link {
+  border: 0;
+  background: transparent;
+  color: #1d4ed8;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0;
+}
+
+.network-hint {
+  color: #047857;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.network-hint.offline {
+  color: #b91c1c;
 }
 
 .login-button {
-  --background: #800000;
-  --background-activated: #660000;
+  margin-top: 6px;
+  --background: #0f172a;
+  --background-hover: #111c31;
+  --background-activated: #111c31;
+  --color: #ffffff;
   --border-radius: 12px;
-  --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  --color: #FFFFFF;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 0.8rem;
-  transition: all 0.3s ease;
-}
-
-.login-button:hover {
-  --background: linear-gradient(135deg, #800000, #660000);
-  transform: translateY(-2px);
-  --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  --box-shadow: 0 12px 24px -14px rgba(15, 23, 42, 0.68);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .login-button ion-spinner {
   margin-right: 10px;
-  animation: pulse 1.5s infinite ease-in-out;
+  --color: #ffffff;
 }
 
-@keyframes scaleIn {
+@keyframes cardEnter {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(10px) scale(0.99);
   }
   to {
     opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
 @media (max-width: 600px) {
+  .login-shell {
+    padding: 16px;
+  }
+
   .login-card {
-    margin: 0 16px;
+    border-radius: 18px;
+  }
+
+  .card-top {
+    padding: 20px 16px 12px;
   }
 
   .card-body {
-    padding: 2rem 1.5rem;
+    padding: 14px 14px 18px;
   }
 
   .header-title {
-    font-size: 1.5rem;
+    font-size: 1.14rem;
   }
 
-  .app-logo {
-    width: 100px;
-    height: 100px;
-  }
-
-  .login-button {
-    font-size: 1.1rem;
-    padding: 0.7rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .card-header {
-    padding: 2rem 1.5rem;
-  }
-
-  .input-item {
-    --padding-start: 12px;
-    --padding-end: 12px;
+  .header-subtitle {
+    font-size: 0.82rem;
   }
 }

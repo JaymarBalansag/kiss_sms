@@ -1,84 +1,159 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-ion-app {
-  background: linear-gradient(135deg, #800000, #FFD700);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.center-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif;
 }
 
 ion-content {
   --background: transparent;
-  background-image: url('/assets/background.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  text-align: center;
 }
 
-.logo-container {
-  margin-bottom: 30px;
-  animation: fadeIn 1s ease-in;
+ion-content::part(background) {
+  background:
+    linear-gradient(rgba(5, 10, 28, 0.48), rgba(5, 10, 28, 0.78)),
+    url('/assets/kiss-background.jpg') center / cover no-repeat,
+    url('/assets/background.webp') center / cover no-repeat;
+}
+
+.loading-shell {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.loading-card {
+  width: min(420px, 100%);
+  margin: 0;
+  border-radius: 24px;
+  border: 1px solid #dfe6f0;
+  background: #fdfefe;
+  box-shadow:
+    0 24px 50px -26px rgba(0, 0, 0, 0.55),
+    0 8px 24px -12px rgba(15, 23, 42, 0.28);
+  animation: cardEnter 420ms ease-out both;
+  overflow: hidden;
+}
+
+.card-top {
+  padding: 24px 22px 14px;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  border-bottom: 1px solid #e5ebf3;
 }
 
 .logo {
-  max-width: 180px;
-  transition: transform 0.3s ease;
+  width: 86px;
+  max-width: 32vw;
+  margin: 0 auto 10px;
+  display: block;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.16));
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.title {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.card-body {
+  padding: 16px 20px 22px;
+  text-align: center;
+}
+
+.status-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #065f46;
+  background: #d1fae5;
+}
+
+.status-chip.offline {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.spinner-wrap {
+  margin: 8px 0 12px;
+}
+
+.spinner-wrap ion-spinner {
+  --color: #0f172a;
+  width: 42px;
+  height: 42px;
 }
 
 .loading-message {
-  font-size: 1.2rem;
+  margin: 0;
+  min-height: 1.6em;
+  color: #334155;
+  font-size: 0.96rem;
   font-weight: 600;
-  color: #ffffff;
-  text-shadow: #FFD700;
-  margin-top: 20px;
-  font-family: 'Inter', sans-serif;
-  animation: fadeIn 1.5s ease-in;
+  letter-spacing: 0.01em;
 }
 
-.network-check-animation ion-spinner {
-  --color: #FFD700;
-  width: 50px;
-  height: 50px;
-}
-
-@keyframes fadeIn {
+@keyframes cardEnter {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px) scale(0.99);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @media (max-width: 600px) {
-  .loading-message {
-    font-size: 1rem;
+  .loading-shell {
+    padding: 16px;
   }
 
-  .logo {
-    max-width: 140px;
+  .loading-card {
+    border-radius: 18px;
+  }
+
+  .card-top {
+    padding: 20px 16px 12px;
+  }
+
+  .card-body {
+    padding: 14px 14px 18px;
+  }
+
+  .title {
+    font-size: 1.12rem;
+  }
+
+  .subtitle {
+    font-size: 0.82rem;
+  }
+
+  .loading-message {
+    font-size: 0.92rem;
   }
 }

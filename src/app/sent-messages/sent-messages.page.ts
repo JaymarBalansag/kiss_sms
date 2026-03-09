@@ -8,7 +8,6 @@ import { ConnectivityService } from '../services/connectivity.service';
 import { ApiUrlModalComponent } from '../api-url-modal/api-url-modal.component';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
-import { Subscription } from 'rxjs';
 import { PluginListenerHandle } from '@capacitor/core';
 
 @Component({
@@ -36,6 +35,13 @@ export class SentMessagesPage implements OnInit, OnDestroy {
     private router: Router,
     private platform: Platform
   ) {}
+
+  get totalMessages(): number {
+    return Object.values(this.groupedMessages).reduce(
+      (count: number, messages: any[]) => count + messages.length,
+      0
+    );
+  }
 
   async ngOnInit() {
     this.networkStatus = await this.connectivityService.checkNetworkStatus();
@@ -220,10 +226,13 @@ export class SentMessagesPage implements OnInit, OnDestroy {
   }
 
   private async showToast(message: string, color: string = 'primary') {
+    const footer = document.querySelector('ion-footer.app-footer') as HTMLElement | null;
     const toast = await this.toastCtrl.create({
       message,
       duration: 3000,
       color,
+      position: 'bottom',
+      ...(footer ? { positionAnchor: footer } : {}),
     });
     await toast.present();
   }
@@ -232,3 +241,7 @@ export class SentMessagesPage implements OnInit, OnDestroy {
     this.backButtonSub?.remove();
   }
 }
+
+
+
+

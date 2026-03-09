@@ -36,3 +36,14 @@
 // @import "@ionic/angular/css/palettes/dark.class.css";
 @import "@ionic/angular/css/palettes/dark.system.css";
 // @import "@ionic/angular/css/palettes/dark.css";
+
+/* Keep toasts above fixed bottom navigation when footer is visible */
+body.with-app-footer ion-toast {
+  --bottom: calc(88px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 600px) {
+  body.with-app-footer ion-toast {
+    --bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+}

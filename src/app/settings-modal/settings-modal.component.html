@@ -1,40 +1,48 @@
-<ion-content class="settings-modal-content">
-  <ion-header translucent class="modal-header">
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-button (click)="dismiss()">
-          <ion-icon name="close-outline" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>
-        <ion-icon name="settings-outline" size="small" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
-        Settings
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header class="modal-header" translucent="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="settings-outline" class="title-icon"></ion-icon>
+      Settings
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" class="close-icon-btn" (click)="dismiss()" aria-label="Close settings">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="modal-body">
-    <ion-card class="modal-card">
-      <ion-card-header>
-        <ion-card-title>Select an Action</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list lines="none">
-          <ion-item button detail="false" (click)="onSetApiUrl()" class="action-item">
-            <ion-icon name="link-outline" slot="start"></ion-icon>
-            <ion-label>Set API URL</ion-label>
-          </ion-item>
-          <ion-item-divider class="action-divider"></ion-item-divider>
-          <ion-item button detail="false" (click)="onLogout()" class="action-item danger">
-            <ion-icon name="log-out-outline" slot="start"></ion-icon>
-            <ion-label>Logout</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-    <ion-button expand="block" color="secondary" class="cancel-button" (click)="dismiss()">
-      <ion-icon name="close-outline" slot="start"></ion-icon>
-      Cancel
+<ion-content class="settings-modal-content" [fullscreen]="true">
+  <div class="modal-shell ion-padding">
+    <section class="intro-card">
+      <h2>Quick Actions</h2>
+      <p>Manage API endpoint and your current session.</p>
+    </section>
+
+    <button type="button" class="action-card" (click)="onSetApiUrl()">
+      <span class="action-icon api">
+        <ion-icon name="link-outline"></ion-icon>
+      </span>
+      <span class="action-copy">
+        <strong>Set API URL</strong>
+        <small>Use a custom endpoint or switch back to default.</small>
+      </span>
+      <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+    </button>
+
+    <button type="button" class="action-card danger" (click)="onLogout()">
+      <span class="action-icon logout">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </span>
+      <span class="action-copy">
+        <strong>Logout</strong>
+        <small>End your current session on this device.</small>
+      </span>
+      <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+    </button>
+
+    <ion-button expand="block" class="close-button" (click)="dismiss()">
+      Close
     </ion-button>
   </div>
 </ion-content>

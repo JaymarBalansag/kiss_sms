@@ -1,74 +1,90 @@
-<ng-container *ngIf="networkStatus">
-  <ion-header>
-    <ion-toolbar color="primary">
+<ng-container *ngIf="networkStatus; else offlineView">
+  <ion-header class="home-header" translucent="true">
+    <ion-toolbar>
       <ion-title>
         <ion-icon name="chatbubbles-outline" class="header-icon"></ion-icon>
-        SMS API Dashboard
+        Pending SMS Queue
       </ion-title>
       <ion-buttons slot="end">
-        <ion-button color="light" (click)="presentSettingsModal()">
-          <ion-icon name="settings-outline" slot="start"></ion-icon>
-          Settings
+        <ion-button fill="clear" class="settings-button" (click)="presentSettingsModal()">
+          <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content class="ion-padding">
-    <div *ngIf="loading" class="loading-container">
-      <ion-spinner name="crescent" color="primary"></ion-spinner>
-      <p class="loading-text">Fetching messages...</p>
-    </div>
+  <ion-content fullscreen>
+    <div class="home-shell ion-padding">
+      <section class="summary-panel">
+        <div class="summary-row">
+          <span class="summary-label">Pending Messages</span>
+          <span class="summary-value">{{ pendingSmsRequests.length }}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Connection</span>
+          <span class="summary-status" [class.offline]="!networkStatus">
+            {{ networkStatus ? 'Online' : 'Offline' }}
+          </span>
+        </div>
+      </section>
 
-    <ion-list lines="none" *ngIf="!loading && pendingSmsRequests.length > 0; else showNoMessages">
-      <ion-card *ngFor="let sms of pendingSmsRequests" class="inbox-card">
-        <ion-card-content>
-          <div class="inbox-header">
-            <div class="request-id">
-              <ion-icon name="pin-outline" class="icon"></ion-icon>
-              Request #{{ sms.id }}
-            </div>
-            <ion-badge [color]="sms.status === 'sent' ? 'success' : 'warning'" class="status-badge">
-              {{ sms.status | uppercase }}
-            </ion-badge>
-          </div>
-
-          <div class="inbox-line">
-            <span class="label">
-              <ion-icon name="call-outline" class="icon"></ion-icon>
-              Number:
-            </span>
-            <span class="value">{{ sms.phone_number }}</span>
-          </div>
-
-          <div class="inbox-line message">
-            <span class="label">
-              <ion-icon name="chatbox-outline" class="icon"></ion-icon>
-              Message:
-            </span>
-            <div class="value message-text">
-              {{ sms.message }}
-            </div>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </ion-list>
-
-    <ng-template #showNoMessages>
-      <div *ngIf="!loading && pendingSmsRequests.length === 0" class="no-messages-container">
-        <ion-icon name="mail-open-outline" class="no-msg-icon"></ion-icon>
-        <ion-text color="medium">
-          <h3>No Pending Messages</h3>
-          <p>Your inbox is clear!</p>
-        </ion-text>
+      <div *ngIf="loading" class="state-panel loading-panel">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Fetching pending messages...</p>
       </div>
-    </ng-template>
+
+      <ion-list lines="none" class="request-list" *ngIf="!loading && pendingSmsRequests.length > 0; else showNoMessages">
+        <ion-card *ngFor="let sms of pendingSmsRequests" class="request-card">
+          <ion-card-content>
+            <div class="request-header">
+              <div class="request-id">
+                <ion-icon name="pin-outline"></ion-icon>
+                <span>Request #{{ sms.id }}</span>
+              </div>
+              <ion-badge [color]="sms.status === 'sent' ? 'success' : 'warning'" class="status-chip">
+                {{ sms.status | uppercase }}
+              </ion-badge>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">
+                <ion-icon name="call-outline"></ion-icon>
+                Number
+              </span>
+              <span class="info-value">{{ sms.phone_number }}</span>
+            </div>
+
+            <div class="info-row message-row">
+              <span class="info-label">
+                <ion-icon name="chatbox-outline"></ion-icon>
+                Message
+              </span>
+              <div class="message-box">{{ sms.message }}</div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+
+      <ng-template #showNoMessages>
+        <div *ngIf="!loading && pendingSmsRequests.length === 0" class="state-panel empty-panel">
+          <ion-icon name="mail-open-outline"></ion-icon>
+          <h3>No Pending Messages</h3>
+          <p>Incoming queue is clear right now.</p>
+        </div>
+      </ng-template>
+    </div>
   </ion-content>
 </ng-container>
 
-<div *ngIf="!networkStatus" class="offline-container">
-  <ion-icon name="wifi-off-outline" size="large" color="danger"></ion-icon>
-  <h2>Offline</h2>
-  <p>Please check your internet connection.</p>
-  <ion-button color="primary" (click)="checkConnection()">Retry</ion-button>
-</div>
+<ng-template #offlineView>
+  <ion-content fullscreen>
+    <div class="offline-shell">
+      <div class="state-panel offline-panel">
+        <ion-icon name="wifi-off-outline"></ion-icon>
+        <h2>Offline</h2>
+        <p>Please check your internet connection.</p>
+        <ion-button (click)="checkConnection()" class="retry-button">Retry</ion-button>
+      </div>
+    </div>
+  </ion-content>
+</ng-template>

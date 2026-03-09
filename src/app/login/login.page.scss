@@ -11,7 +11,7 @@ ion-content {
 
 ion-content::part(background) {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.72)),
+    linear-gradient(rgba(5, 10, 28, 0.48), rgba(5, 10, 28, 0.78)),
     url('/assets/kiss-background.jpg') center / cover no-repeat,
     url('/assets/background.webp') center / cover no-repeat;
 }
@@ -24,49 +24,51 @@ ion-content::part(background) {
   padding: 24px;
 }
 
-.glass-card {
+.login-card {
   width: min(460px, 100%);
   margin: 0;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 28px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  animation: cardEnter 520ms ease-out both;
+  border-radius: 24px;
+  border: 1px solid #dfe6f0;
+  background: #fdfefe;
+  box-shadow:
+    0 24px 50px -26px rgba(0, 0, 0, 0.55),
+    0 8px 24px -12px rgba(15, 23, 42, 0.28);
+  animation: cardEnter 420ms ease-out both;
+  overflow: hidden;
 }
 
-.brand-wrap {
+.card-top {
+  padding: 24px 22px 14px;
   text-align: center;
-  padding: 28px 24px 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  border-bottom: 1px solid #e5ebf3;
 }
 
 .app-logo {
-  width: 96px;
-  max-width: 34vw;
-  margin: 0 auto 12px;
+  width: 88px;
+  max-width: 30vw;
+  margin: 0 auto 10px;
   display: block;
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.16));
 }
 
 .header-title {
   margin: 0;
-  color: #ffffff;
-  font-size: 1.36rem;
+  color: #0f172a;
+  font-size: 1.34rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .header-subtitle {
-  margin: 8px 0 0;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.92rem;
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
 .card-body {
-  padding: 12px 20px 24px;
+  padding: 16px 20px 22px;
 }
 
 .login-form {
@@ -74,29 +76,31 @@ ion-content::part(background) {
   gap: 14px;
 }
 
-.glass-input {
-  --background: rgba(255, 255, 255, 0.08);
-  --border-radius: 14px;
-  --padding-start: 14px;
-  --padding-end: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+.form-item {
+  --background: #ffffff;
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border: 1px solid #d5deea;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.glass-input.ion-focused {
-  border-color: rgba(255, 255, 255, 0.46);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+.form-item.ion-focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-.glass-input ion-label {
-  color: rgba(255, 255, 255, 0.9) !important;
+.form-item ion-label {
+  color: #334155 !important;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
+  letter-spacing: 0.01em;
 }
 
-.glass-input ion-input {
-  --color: #ffffff;
-  --placeholder-color: rgba(255, 255, 255, 0.58);
+.form-item ion-input {
+  --color: #0f172a;
+  --placeholder-color: #64748b;
   --placeholder-opacity: 1;
   font-size: 0.98rem;
 }
@@ -111,32 +115,33 @@ ion-content::part(background) {
 .forgot-link {
   border: 0;
   background: transparent;
-  color: rgba(255, 255, 255, 0.9);
+  color: #1d4ed8;
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0;
 }
 
 .network-hint {
-  color: #a7f3d0;
-  font-size: 0.8rem;
+  color: #047857;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .network-hint.offline {
-  color: #fecaca;
+  color: #b91c1c;
 }
 
 .login-button {
   margin-top: 6px;
-  --background: rgba(255, 255, 255, 0.92);
-  --background-activated: #ffffff;
-  --background-hover: #ffffff;
-  --color: #111827;
+  --background: #0f172a;
+  --background-hover: #111c31;
+  --background-activated: #111c31;
+  --color: #ffffff;
   --border-radius: 12px;
-  --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
-  font-size: 1rem;
+  --box-shadow: 0 12px 24px -14px rgba(15, 23, 42, 0.68);
+  font-size: 0.98rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: none;
@@ -144,13 +149,13 @@ ion-content::part(background) {
 
 .login-button ion-spinner {
   margin-right: 10px;
-  --color: #111827;
+  --color: #ffffff;
 }
 
 @keyframes cardEnter {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.985);
+    transform: translateY(10px) scale(0.99);
   }
   to {
     opacity: 1;
@@ -163,23 +168,23 @@ ion-content::part(background) {
     padding: 16px;
   }
 
-  .glass-card {
-    border-radius: 24px;
+  .login-card {
+    border-radius: 18px;
   }
 
-  .brand-wrap {
-    padding: 22px 16px 12px;
+  .card-top {
+    padding: 20px 16px 12px;
   }
 
   .card-body {
-    padding: 10px 14px 18px;
+    padding: 14px 14px 18px;
   }
 
   .header-title {
-    font-size: 1.2rem;
+    font-size: 1.14rem;
   }
 
   .header-subtitle {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
   }
 }

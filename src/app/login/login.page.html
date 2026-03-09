@@ -1,23 +1,34 @@
 <ion-content fullscreen>
   <div class="login-shell">
-    <ion-card class="glass-card">
-      <div class="brand-wrap">
-        <img src="assets/mcr.webp" alt="BFP Logo" class="app-logo" />
+    <ion-card class="login-card">
+      <div class="card-top">
+        <img src="assets/mcr.webp" alt="MCR Logo" class="app-logo" />
         <h1 class="header-title">KISS SMS Gateway</h1>
-        <p class="header-subtitle">KISS & MADS SMS Dispatcher</p>
+        <p class="header-subtitle">KISS &amp; MADS SMS Dispatcher</p>
       </div>
 
       <ion-card-content class="card-body">
         <form (ngSubmit)="login()" class="login-form">
-          <ion-item class="glass-input" lines="none">
+          <ion-item class="form-item" lines="none">
             <ion-label position="stacked">Email Address</ion-label>
-            <ion-input [(ngModel)]="email" name="email" type="email" placeholder="name@domain.com" required></ion-input>
+            <ion-input
+              [(ngModel)]="email"
+              name="email"
+              type="email"
+              placeholder="name@domain.com"
+              required
+            ></ion-input>
           </ion-item>
 
-          <ion-item class="glass-input" lines="none">
+          <ion-item class="form-item" lines="none">
             <ion-label position="stacked">Password</ion-label>
-            <ion-input [(ngModel)]="password" name="password" type="password" placeholder="Enter your password"
-              required></ion-input>
+            <ion-input
+              [(ngModel)]="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+            ></ion-input>
           </ion-item>
 
           <div class="actions-row">

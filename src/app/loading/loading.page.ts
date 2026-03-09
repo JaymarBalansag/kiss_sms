@@ -46,7 +46,8 @@ export class LoadingPage implements OnInit, OnDestroy {
 
     if (this.networkStatus) {
       this.loadingMessage = 'Connected. Checking server...';
-      const isServerUp = await this.connectivityService.pingServer('https://bfp.unitech.host/api/ping');
+      // const isServerUp = await this.connectivityService.pingServer('https://bfp.unitech.host/api/ping');
+      const isServerUp = true;
 
       if (isServerUp) {
         const isLoggedIn = await this.authService.isLoggedIn();

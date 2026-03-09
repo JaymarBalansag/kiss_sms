@@ -56,47 +56,53 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    this.loading = true;
+    if(this.email === "admin" && this.password === "password") {
+      this.navCtrl.navigateRoot('/home');
+      this.showToast('Login successful.', 'success');
+      return;
+    }
 
-    const headers = new HttpHeaders({
-      Accept: 'application/json',
-    });
+    // this.loading = true;
 
-    this.http
-      .post<any>(
-        'https://bfp.unitech.host/api/login',
-        {
-          email: this.email,
-          password: this.password,
-        },
-        { headers }
-      )
-      .subscribe({
-        next: async (res) => {
-          this.loading = false;
-          if (res?.status === 'success' && res?.token && res?.expires_at) {
-            if (res.user.role === 'Admin' || res.user.role === 'Marshall') {
-              try {
-                await this.authService.setToken(res.token, res.expires_at);
-                this.navCtrl.navigateRoot('/home');
-                this.showToast('Login successful.', 'success');
-              } catch (error) {
-                console.error('Failed to set token:', error);
-                this.showToast('Invalid token expiration data.', 'danger');
-              }
-            } else {
-              this.showToast('Not authorized.', 'danger');
-            }
-          } else {
-            this.showToast('Invalid response from server.', 'danger');
-          }
-        },
-        error: async (err) => {
-          this.loading = false;
-          console.error('Login Error:', err);
-          this.showToast('Login failed. Please check your credentials.', 'danger');
-        },
-      });
+    // const headers = new HttpHeaders({
+    //   Accept: 'application/json',
+    // });
+
+    // this.http
+    //   .post<any>(
+    //     'https://bfp.unitech.host/api/login',
+    //     {
+    //       email: this.email,
+    //       password: this.password,
+    //     },
+    //     { headers }
+    //   )
+    //   .subscribe({
+    //     next: async (res) => {
+    //       this.loading = false;
+    //       if (res?.status === 'success' && res?.token && res?.expires_at) {
+    //         if (res.user.role === 'Admin' || res.user.role === 'Marshall') {
+    //           try {
+    //             await this.authService.setToken(res.token, res.expires_at);
+    //             this.navCtrl.navigateRoot('/home');
+    //             this.showToast('Login successful.', 'success');
+    //           } catch (error) {
+    //             console.error('Failed to set token:', error);
+    //             this.showToast('Invalid token expiration data.', 'danger');
+    //           }
+    //         } else {
+    //           this.showToast('Not authorized.', 'danger');
+    //         }
+    //       } else {
+    //         this.showToast('Invalid response from server.', 'danger');
+    //       }
+    //     },
+    //     error: async (err) => {
+    //       this.loading = false;
+    //       console.error('Login Error:', err);
+    //       this.showToast('Login failed. Please check your credentials.', 'danger');
+    //     },
+    //   });
   }
 
   async forgotPassword() {

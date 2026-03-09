@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoadingPage implements OnInit, OnDestroy {
   networkStatus: boolean = false;
-  loadingMessage: string = 'Checking network connectivity...';
+  loadingMessage: string = 'Checking network...';
   private networkSubscription?: PluginListenerHandle;
   public hasProceeded: boolean = false;
 
@@ -47,8 +47,8 @@ export class LoadingPage implements OnInit, OnDestroy {
 
     if (this.networkStatus) {
       this.loadingMessage = 'Connected. Checking server...';
-      const isServerUp = await this.connectivityService.pingServer(environment.apiUrl + '/ping');
-      // const isServerUp = true;
+      // const isServerUp = await this.connectivityService.pingServer(environment.apiUrl + '/ping');
+      const isServerUp = false;
 
       if (isServerUp) {
         const isLoggedIn = await this.authService.isLoggedIn();

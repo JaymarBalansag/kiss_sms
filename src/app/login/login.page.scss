@@ -1,210 +1,185 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-ion-content {
-  --background: linear-gradient(135deg, #800000, #FFD700);
+:host {
+  display: block;
   font-family: 'Inter', sans-serif;
 }
 
-.container {
+ion-content {
+  --background: transparent;
+}
+
+ion-content::part(background) {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.72)),
+    url('/assets/kiss-background.jpg') center / cover no-repeat,
+    url('/assets/background.webp') center / cover no-repeat;
+}
+
+.login-shell {
+  min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  background-image: url('/assets/background.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+  padding: 24px;
 }
 
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+.glass-card {
+  width: min(460px, 100%);
+  margin: 0;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 28px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  animation: cardEnter 520ms ease-out both;
 }
 
-.login-card {
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  background: #FFFFFF;
-  animation: scaleIn 0.8s ease-out;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
-}
-
-.card-header {
-  background: #800000;
-  color: #FFFFFF;
-  padding: 2.5rem 2rem;
+.brand-wrap {
   text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  padding: 28px 24px 16px;
+}
+
+.app-logo {
+  width: 96px;
+  max-width: 34vw;
+  margin: 0 auto 12px;
+  display: block;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
 }
 
 .header-title {
   margin: 0;
-  font-size: 1.8rem;
+  color: #ffffff;
+  font-size: 1.36rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.02em;
 }
 
-.logo-container {
-  margin-bottom: 1.5rem;
-}
-
-.app-logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 3px solid #FFD700;
-}
-
-.divider {
-  width: 60px;
-  height: 4px;
-  background: #FFD700;
-  margin: 1rem auto 0;
-  border-radius: 2px;
+.header-subtitle {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.92rem;
+  font-weight: 500;
 }
 
 .card-body {
-  padding: 3rem 2.5rem;
+  padding: 12px 20px 24px;
 }
 
-.input-item {
-  --background: #F9FAFB;
-  --border-radius: 10px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  margin-bottom: 1.5rem;
-  border: 2px solid #E5E7EB;
-  transition: border-color 0.3s ease;
+.login-form {
+  display: grid;
+  gap: 14px;
 }
 
-.input-item:hover,
-.input-item--focused {
-  border-color: #800000;
+.glass-input {
+  --background: rgba(255, 255, 255, 0.08);
+  --border-radius: 14px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-ion-label {
-  font-size: 1rem;
+.glass-input.ion-focused {
+  border-color: rgba(255, 255, 255, 0.46);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+.glass-input ion-label {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: #374151;
-  transform-origin: top left;
-  transition: all 0.3s ease;
+  margin-bottom: 6px;
 }
 
-ion-input {
-  --color: #1F2937;
-  --placeholder-color: #6B7280;
-  --placeholder-opacity: 0.8;
-  font-size: 1rem;
+.glass-input ion-input {
+  --color: #ffffff;
+  --placeholder-color: rgba(255, 255, 255, 0.58);
+  --placeholder-opacity: 1;
+  font-size: 0.98rem;
 }
 
-.forgot-password {
-  margin: 1rem 0 1.5rem;
-  text-align: right;
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
 }
 
-.forgot-password a {
-  color: #800000;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.forgot-link {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0;
 }
 
-.forgot-password a:hover {
-  color: #660000;
+.network-hint {
+  color: #a7f3d0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.network-hint.offline {
+  color: #fecaca;
 }
 
 .login-button {
-  --background: #800000;
-  --background-activated: #660000;
+  margin-top: 6px;
+  --background: rgba(255, 255, 255, 0.92);
+  --background-activated: #ffffff;
+  --background-hover: #ffffff;
+  --color: #111827;
   --border-radius: 12px;
-  --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  --color: #FFFFFF;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 0.8rem;
-  transition: all 0.3s ease;
-}
-
-.login-button:hover {
-  --background: linear-gradient(135deg, #800000, #660000);
-  transform: translateY(-2px);
-  --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .login-button ion-spinner {
   margin-right: 10px;
-  animation: pulse 1.5s infinite ease-in-out;
+  --color: #111827;
 }
 
-@keyframes scaleIn {
+@keyframes cardEnter {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(14px) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
 @media (max-width: 600px) {
-  .login-card {
-    margin: 0 16px;
+  .login-shell {
+    padding: 16px;
+  }
+
+  .glass-card {
+    border-radius: 24px;
+  }
+
+  .brand-wrap {
+    padding: 22px 16px 12px;
   }
 
   .card-body {
-    padding: 2rem 1.5rem;
+    padding: 10px 14px 18px;
   }
 
   .header-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
-  .app-logo {
-    width: 100px;
-    height: 100px;
-  }
-
-  .login-button {
-    font-size: 1.1rem;
-    padding: 0.7rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .card-header {
-    padding: 2rem 1.5rem;
-  }
-
-  .input-item {
-    --padding-start: 12px;
-    --padding-end: 12px;
+  .header-subtitle {
+    font-size: 0.84rem;
   }
 }

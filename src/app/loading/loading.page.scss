@@ -1,84 +1,132 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-ion-app {
-  background: linear-gradient(135deg, #800000, #FFD700);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.center-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+:host {
+  display: block;
+  font-family: 'Inter', sans-serif;
 }
 
 ion-content {
   --background: transparent;
-  background-image: url('/assets/background.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  text-align: center;
 }
 
-.logo-container {
-  margin-bottom: 30px;
-  animation: fadeIn 1s ease-in;
+ion-content::part(background) {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.72)),
+    url('/assets/kiss-background.jpg') center / cover no-repeat,
+    url('/assets/background.webp') center / cover no-repeat;
+}
+
+.loading-shell {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.glass-card {
+  width: min(420px, 100%);
+  text-align: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 28px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 34px 24px 28px;
+  animation: cardEnter 480ms ease-out both;
+}
+
+.logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
 }
 
 .logo {
-  max-width: 180px;
-  transition: transform 0.3s ease;
+  width: 110px;
+  max-width: 42vw;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.title {
+  margin: 0;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.spinner-wrap {
+  margin: 18px 0 14px;
+  animation: pulseSoft 1.8s ease-in-out infinite;
+}
+
+.spinner-wrap ion-spinner {
+  --color: #ffffff;
+  width: 44px;
+  height: 44px;
 }
 
 .loading-message {
-  font-size: 1.2rem;
+  margin: 0;
+  min-height: 1.6em;
+  font-size: 0.98rem;
   font-weight: 600;
-  color: #ffffff;
-  text-shadow: #FFD700;
-  margin-top: 20px;
-  font-family: 'Inter', sans-serif;
-  animation: fadeIn 1.5s ease-in;
+  color: #f5f8ff;
+  letter-spacing: 0.01em;
 }
 
-.network-check-animation ion-spinner {
-  --color: #FFD700;
-  width: 50px;
-  height: 50px;
-}
-
-@keyframes fadeIn {
+@keyframes cardEnter {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(14px) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseSoft {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
   }
 }
 
 @media (max-width: 600px) {
-  .loading-message {
-    font-size: 1rem;
+  .loading-shell {
+    padding: 16px;
   }
 
-  .logo {
-    max-width: 140px;
+  .glass-card {
+    border-radius: 24px;
+    padding: 28px 18px 22px;
+  }
+
+  .title {
+    font-size: 1.06rem;
+  }
+
+  .subtitle {
+    font-size: 0.84rem;
+  }
+
+  .loading-message {
+    font-size: 0.93rem;
   }
 }

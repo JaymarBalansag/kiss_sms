@@ -220,10 +220,13 @@ export class SentMessagesPage implements OnInit, OnDestroy {
   }
 
   private async showToast(message: string, color: string = 'primary') {
+    const footer = document.querySelector('ion-footer.app-footer') as HTMLElement | null;
     const toast = await this.toastCtrl.create({
       message,
       duration: 3000,
       color,
+      position: 'bottom',
+      ...(footer ? { positionAnchor: footer } : {}),
     });
     await toast.present();
   }
@@ -232,3 +235,4 @@ export class SentMessagesPage implements OnInit, OnDestroy {
     this.backButtonSub?.remove();
   }
 }
+

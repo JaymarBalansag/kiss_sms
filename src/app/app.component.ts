@@ -46,17 +46,20 @@ export class AppComponent implements OnInit, OnDestroy {
     this.monitorLoginStatus();
     this.listenToNetworkChanges();
     this.monitorRouteChanges();
+    this.updateFooterPresenceClass();
   }
 
   monitorLoginStatus() {
     this.loginSub = this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
+      this.updateFooterPresenceClass();
     });
   }
 
   async listenToNetworkChanges() {
     this.networkSub = await this.connectivityService.startNetworkListener((isConnected: boolean) => {
       this.networkStatus = isConnected;
+      this.updateFooterPresenceClass();
       if (isConnected) {
         this.monitorLoginStatus();
       }
@@ -68,6 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.currentRoute = event.urlAfterRedirects;
+        this.updateFooterPresenceClass();
         if (Capacitor.isNativePlatform()) {
           this.setStatusBarColor();
         }
@@ -91,6 +95,14 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
+  private updateFooterPresenceClass() {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    document.body.classList.toggle('with-app-footer', this.shouldShowFooter());
+  }
+
   isActiveTab(route: string): boolean {
     return this.currentRoute === route;
   }
@@ -102,6 +114,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     if (this.routerSub) {
       this.routerSub.unsubscribe();
+    }
+
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove('with-app-footer');
     }
   }
 

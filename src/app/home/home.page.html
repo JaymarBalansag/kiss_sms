@@ -1,5 +1,5 @@
 <ng-container *ngIf="networkStatus; else offlineView">
-  <ion-header class="glass-header" translucent="true">
+  <ion-header class="home-header" translucent="true">
     <ion-toolbar>
       <ion-title>
         <ion-icon name="chatbubbles-outline" class="header-icon"></ion-icon>
@@ -15,18 +15,20 @@
 
   <ion-content fullscreen>
     <div class="home-shell ion-padding">
-      <section class="overview-card">
-        <div class="overview-line">
-          <span class="overview-label">Pending Messages</span>
-          <span class="overview-value">{{ pendingSmsRequests.length }}</span>
+      <section class="summary-panel">
+        <div class="summary-row">
+          <span class="summary-label">Pending Messages</span>
+          <span class="summary-value">{{ pendingSmsRequests.length }}</span>
         </div>
-        <div class="overview-line">
-          <span class="overview-label">Connection</span>
-          <span class="overview-status online">Online</span>
+        <div class="summary-row">
+          <span class="summary-label">Connection</span>
+          <span class="summary-status" [class.offline]="!networkStatus">
+            {{ networkStatus ? 'Online' : 'Offline' }}
+          </span>
         </div>
       </section>
 
-      <div *ngIf="loading" class="state-card loading-state">
+      <div *ngIf="loading" class="state-panel loading-panel">
         <ion-spinner name="crescent"></ion-spinner>
         <p>Fetching pending messages...</p>
       </div>
@@ -39,7 +41,7 @@
                 <ion-icon name="pin-outline"></ion-icon>
                 <span>Request #{{ sms.id }}</span>
               </div>
-              <ion-badge [color]="sms.status === 'sent' ? 'success' : 'warning'" class="status-badge">
+              <ion-badge [color]="sms.status === 'sent' ? 'success' : 'warning'" class="status-chip">
                 {{ sms.status | uppercase }}
               </ion-badge>
             </div>
@@ -64,7 +66,7 @@
       </ion-list>
 
       <ng-template #showNoMessages>
-        <div *ngIf="!loading && pendingSmsRequests.length === 0" class="state-card empty-state">
+        <div *ngIf="!loading && pendingSmsRequests.length === 0" class="state-panel empty-panel">
           <ion-icon name="mail-open-outline"></ion-icon>
           <h3>No Pending Messages</h3>
           <p>Incoming queue is clear right now.</p>
@@ -77,7 +79,7 @@
 <ng-template #offlineView>
   <ion-content fullscreen>
     <div class="offline-shell">
-      <div class="state-card offline-state">
+      <div class="state-panel offline-panel">
         <ion-icon name="wifi-off-outline"></ion-icon>
         <h2>Offline</h2>
         <p>Please check your internet connection.</p>

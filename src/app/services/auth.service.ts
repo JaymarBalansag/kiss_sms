@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,15 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this.loadLoginStatus(); // Initialize login status on service load
+  }
+
+  private defaultApiUrl = environment.apiUrl;
+
+  get apiUrl(): string {
+    const storedUrl = localStorage.getItem('customApiUrl');
+    return storedUrl && storedUrl.trim() !== '' ? storedUrl : this.defaultApiUrl;
   }
 
   // Load login status at service startup
@@ -85,8 +94,23 @@ export class AuthService {
     return true;
   }
 
-  // Logout and clear storage
+  // Logout from API (best-effort), then clear storage
   async logout(): Promise<void> {
+    const token = await this.getToken();
+
+    if (token) {
+      const headers = new HttpHeaders({
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+      });
+
+      try {
+        await firstValueFrom(this.http.post(`${this.apiUrl}/sms/logout`, {}, { headers }));
+      } catch (error) {
+        console.warn('SMS logout API failed (continuing local logout):', error);
+      }
+    }
+
     await Storage.remove({ key: this.tokenKey });
     await Storage.remove({ key: this.expiresAtKey });
     this.isLoggedInSubject.next(false);

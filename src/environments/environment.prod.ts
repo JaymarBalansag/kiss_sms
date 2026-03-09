@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://bfp.unitech.host/api'
+  apiUrl: 'https://kiss.mcrabuyogmads.com/api'
 };

@@ -4,6 +4,7 @@ import { ConnectivityService } from '../services/connectivity.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import type { PluginListenerHandle } from '@capacitor/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-loading',
@@ -46,8 +47,8 @@ export class LoadingPage implements OnInit, OnDestroy {
 
     if (this.networkStatus) {
       this.loadingMessage = 'Connected. Checking server...';
-      // const isServerUp = await this.connectivityService.pingServer('https://bfp.unitech.host/api/ping');
-      const isServerUp = true;
+      const isServerUp = await this.connectivityService.pingServer(environment.apiUrl + '/ping');
+      // const isServerUp = true;
 
       if (isServerUp) {
         const isLoggedIn = await this.authService.isLoggedIn();

@@ -4,6 +4,7 @@ import { AlertController, ModalController, NavController, ToastController } from
 import { ConnectivityService } from '../services/connectivity.service';
 import { AuthService } from '../services/auth.service';
 import { ForgotPasswordModalComponent } from '../forgot-password-modal/forgot-password-modal.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,13 @@ export class LoginPage implements OnInit {
   password = '';
   loading = false;
   networkStatus: boolean = false;
+
+  private defaultApiUrl = environment.apiUrl;
+
+  get apiUrl(): string {
+    const storedUrl = localStorage.getItem('customApiUrl');
+    return storedUrl && storedUrl.trim() !== '' ? storedUrl : this.defaultApiUrl;
+  }
 
   constructor(
     private http: HttpClient,
@@ -56,53 +64,47 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    if(this.email === "admin" && this.password === "password") {
-      this.navCtrl.navigateRoot('/home');
-      this.showToast('Login successful.', 'success');
-      return;
-    }
+    this.loading = true;
 
-    // this.loading = true;
+    const headers = new HttpHeaders({
+      Accept: 'application/json',
+    });
 
-    // const headers = new HttpHeaders({
-    //   Accept: 'application/json',
-    // });
-
-    // this.http
-    //   .post<any>(
-    //     'https://bfp.unitech.host/api/login',
-    //     {
-    //       email: this.email,
-    //       password: this.password,
-    //     },
-    //     { headers }
-    //   )
-    //   .subscribe({
-    //     next: async (res) => {
-    //       this.loading = false;
-    //       if (res?.status === 'success' && res?.token && res?.expires_at) {
-    //         if (res.user.role === 'Admin' || res.user.role === 'Marshall') {
-    //           try {
-    //             await this.authService.setToken(res.token, res.expires_at);
-    //             this.navCtrl.navigateRoot('/home');
-    //             this.showToast('Login successful.', 'success');
-    //           } catch (error) {
-    //             console.error('Failed to set token:', error);
-    //             this.showToast('Invalid token expiration data.', 'danger');
-    //           }
-    //         } else {
-    //           this.showToast('Not authorized.', 'danger');
-    //         }
-    //       } else {
-    //         this.showToast('Invalid response from server.', 'danger');
-    //       }
-    //     },
-    //     error: async (err) => {
-    //       this.loading = false;
-    //       console.error('Login Error:', err);
-    //       this.showToast('Login failed. Please check your credentials.', 'danger');
-    //     },
-    //   });
+    this.http
+      .post<any>(
+        `${this.apiUrl}/sms/login`,
+        {
+          email: this.email,
+          password: this.password,
+        },
+        { headers }
+      )
+      .subscribe({
+        next: async (res) => {
+          this.loading = false;
+          if (res?.status === 'success' && res?.token && res?.expires_at) {
+            if (res.user.role === 'staff' || res.user.role === 'admin') {
+              try {
+                await this.authService.setToken(res.token, res.expires_at);
+                this.navCtrl.navigateRoot('/home');
+                this.showToast('Login successful.', 'success');
+              } catch (error) {
+                console.error('Failed to set token:', error);
+                this.showToast('Invalid token expiration data.', 'danger');
+              }
+            } else {
+              this.showToast('Not authorized.', 'danger');
+            }
+          } else {
+            this.showToast('Invalid response from server.', 'danger');
+          }
+        },
+        error: async (err) => {
+          this.loading = false;
+          console.error('Login Error:', err);
+          this.showToast('Login failed. Please check your credentials.', 'danger');
+        },
+      });
   }
 
   async forgotPassword() {

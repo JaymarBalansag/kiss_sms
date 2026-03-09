@@ -1,18 +1,25 @@
 <ion-content fullscreen>
   <div class="loading-shell">
-    <div class="glass-card">
-      <div class="logo-wrap">
-        <img src="assets/mcr.webp" alt="BFP Logo" class="logo" />
+    <ion-card class="loading-card">
+      <div class="card-top">
+        <img src="assets/mcr.webp" alt="MCR Logo" class="logo" />
+        <h1 class="title">KISS SMS Gateway</h1>
+        <p class="subtitle">Starting secure SMS dispatcher services</p>
       </div>
 
-      <h1 class="title">KISS SMS Gateway</h1>
-      <p class="subtitle">Initializing SMS Gateway</p>
+      <ion-card-content class="card-body">
+        <div class="status-row">
+          <span class="status-chip" [class.offline]="!networkStatus">
+            {{ networkStatus ? 'Online' : 'Offline' }}
+          </span>
+        </div>
 
-      <div class="spinner-wrap" *ngIf="!hasProceeded" aria-live="polite" aria-busy="true">
-        <ion-spinner name="crescent"></ion-spinner>
-      </div>
+        <div class="spinner-wrap" *ngIf="!hasProceeded" aria-live="polite" aria-busy="true">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
 
-      <p class="loading-message">{{ loadingMessage }}</p>
-    </div>
+        <p class="loading-message">{{ loadingMessage }}</p>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

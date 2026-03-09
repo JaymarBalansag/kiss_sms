@@ -11,7 +11,7 @@ ion-content {
 
 ion-content::part(background) {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.72)),
+    linear-gradient(rgba(5, 10, 28, 0.48), rgba(5, 10, 28, 0.78)),
     url('/assets/kiss-background.jpg') center / cover no-repeat,
     url('/assets/background.webp') center / cover no-repeat;
 }
@@ -24,87 +24,107 @@ ion-content::part(background) {
   padding: 24px;
 }
 
-.glass-card {
+.loading-card {
   width: min(420px, 100%);
-  text-align: center;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 28px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  padding: 34px 24px 28px;
-  animation: cardEnter 480ms ease-out both;
+  margin: 0;
+  border-radius: 24px;
+  border: 1px solid #dfe6f0;
+  background: #fdfefe;
+  box-shadow:
+    0 24px 50px -26px rgba(0, 0, 0, 0.55),
+    0 8px 24px -12px rgba(15, 23, 42, 0.28);
+  animation: cardEnter 420ms ease-out both;
+  overflow: hidden;
 }
 
-.logo-wrap {
+.card-top {
+  padding: 24px 22px 14px;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  border-bottom: 1px solid #e5ebf3;
+}
+
+.logo {
+  width: 86px;
+  max-width: 32vw;
+  margin: 0 auto 10px;
+  display: block;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.16));
+}
+
+.title {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.card-body {
+  padding: 16px 20px 22px;
+  text-align: center;
+}
+
+.status-row {
   display: flex;
   justify-content: center;
   margin-bottom: 12px;
 }
 
-.logo {
-  width: 110px;
-  max-width: 42vw;
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
-}
-
-.title {
-  margin: 0;
-  font-size: 1.18rem;
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #ffffff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #065f46;
+  background: #d1fae5;
 }
 
-.subtitle {
-  margin: 8px 0 0;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.82);
+.status-chip.offline {
+  color: #991b1b;
+  background: #fee2e2;
 }
 
 .spinner-wrap {
-  margin: 18px 0 14px;
-  animation: pulseSoft 1.8s ease-in-out infinite;
+  margin: 8px 0 12px;
 }
 
 .spinner-wrap ion-spinner {
-  --color: #ffffff;
-  width: 44px;
-  height: 44px;
+  --color: #0f172a;
+  width: 42px;
+  height: 42px;
 }
 
 .loading-message {
   margin: 0;
   min-height: 1.6em;
-  font-size: 0.98rem;
+  color: #334155;
+  font-size: 0.96rem;
   font-weight: 600;
-  color: #f5f8ff;
   letter-spacing: 0.01em;
 }
 
 @keyframes cardEnter {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.985);
+    transform: translateY(10px) scale(0.99);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes pulseSoft {
-  0%,
-  100% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.04);
   }
 }
 
@@ -113,20 +133,27 @@ ion-content::part(background) {
     padding: 16px;
   }
 
-  .glass-card {
-    border-radius: 24px;
-    padding: 28px 18px 22px;
+  .loading-card {
+    border-radius: 18px;
+  }
+
+  .card-top {
+    padding: 20px 16px 12px;
+  }
+
+  .card-body {
+    padding: 14px 14px 18px;
   }
 
   .title {
-    font-size: 1.06rem;
+    font-size: 1.12rem;
   }
 
   .subtitle {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
   }
 
   .loading-message {
-    font-size: 0.93rem;
+    font-size: 0.92rem;
   }
 }

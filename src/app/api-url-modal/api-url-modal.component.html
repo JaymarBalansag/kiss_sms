@@ -1,48 +1,48 @@
-<ion-content class="api-url-modal-content">
-  <ion-header translucent class="modal-header">
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-button (click)="dismiss()">
-          <ion-icon name="close-outline" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title>
-        <ion-icon name="link-outline" size="small" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
-        Set API URL
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header class="modal-header" translucent="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-icon name="link-outline" class="title-icon"></ion-icon>
+      Set API URL
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" class="close-icon-btn" (click)="dismiss()" aria-label="Close API URL modal">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="modal-body">
-    <ion-card class="modal-card">
-      <ion-card-header>
-        <ion-card-title>Configure API Endpoint</ion-card-title>
-        <div class="divider"></div>
-      </ion-card-header>
-      <ion-card-content>
-        <form (ngSubmit)="save()">
-          <ion-item class="input-item" lines="none">
-            <ion-label position="floating">API URL</ion-label>
-            <ion-input
-              [(ngModel)]="apiUrl"
-              name="apiUrl"
-              type="text"
-              placeholder="Leave blank to use default"
-              clearOnEdit="false"
-            ></ion-input>
-          </ion-item>
-          <div class="button-group">
-            <ion-button expand="block" color="primary" class="save-button" type="submit">
-              <ion-icon name="save-outline" slot="start"></ion-icon>
-              Save
-            </ion-button>
-            <ion-button expand="block" color="secondary" class="cancel-button" (click)="dismiss()">
-              <ion-icon name="close-outline" slot="start"></ion-icon>
-              Cancel
-            </ion-button>
-          </div>
-        </form>
-      </ion-card-content>
-    </ion-card>
+<ion-content class="api-url-modal-content" [fullscreen]="true">
+  <div class="modal-shell ion-padding">
+    <section class="intro-card">
+      <h2>Endpoint Configuration</h2>
+      <p>Set a custom API base URL. Leave it blank to use the default endpoint.</p>
+    </section>
+
+    <form class="form-card" (ngSubmit)="save()">
+      <label for="api-url-input" class="input-label">API URL</label>
+      <ion-item class="input-item" lines="none">
+        <ion-input
+          id="api-url-input"
+          [(ngModel)]="apiUrl"
+          name="apiUrl"
+          type="text"
+          placeholder="https://example.com/api"
+          clearOnEdit="false"
+        ></ion-input>
+      </ion-item>
+      <p class="field-help">Example: <code>https://yourdomain.com/api</code></p>
+
+      <div class="action-row">
+        <ion-button expand="block" class="save-button" type="submit">
+          <ion-icon name="save-outline" slot="start"></ion-icon>
+          Save URL
+        </ion-button>
+        <ion-button expand="block" fill="outline" class="cancel-button" type="button" (click)="dismiss()">
+          <ion-icon name="close-outline" slot="start"></ion-icon>
+          Cancel
+        </ion-button>
+      </div>
+    </form>
   </div>
 </ion-content>

@@ -1,224 +1,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.api-url-modal-content {
-  --background: #F3F4F6;
+:host {
+  display: block;
   font-family: 'Inter', sans-serif;
 }
 
-ion-backdrop {
-  --backdrop-opacity: 0.5;
-}
-
-.modal-header {
-  --background: #800000;
-  --color: #FFFFFF;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.modal-header ion-toolbar {
+  --background: rgba(15, 23, 42, 0.96);
+  --color: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.14);
 }
 
 ion-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding: 0 16px;
-}
-
-.modal-body {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 20px;
+  gap: 8px;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.title-icon {
+  font-size: 1.05rem;
+}
+
+.close-icon-btn {
+  --color: #ffffff;
+  --background: rgba(255, 255, 255, 0.08);
+  --border-radius: 10px;
+}
+
+.api-url-modal-content {
+  --background: #f1f5f9;
+}
+
+.modal-shell {
   min-height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: max(14px, env(safe-area-inset-top));
+  padding-bottom: calc(14px + env(safe-area-inset-bottom));
 }
 
-.modal-card {
+.intro-card,
+.form-card {
+  border: 1px solid #dfe6f0;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  background: #FFFFFF;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  animation: fadeIn 0.5s ease-out;
+  background: #fdfefe;
+  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.35);
+  padding: 14px 16px;
 }
 
-ion-card-header {
-  padding: 1.5rem 2rem;
+.intro-card h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.02rem;
+  font-weight: 700;
 }
 
-ion-card-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #374151;
-  text-align: center;
+.intro-card p {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
-.divider {
-  width: 60px;
-  height: 4px;
-  background: #FFD700;
-  margin: 1rem auto 0;
-  border-radius: 2px;
-}
-
-ion-card-content {
-  padding: 1.5rem 2rem 2rem;
+.input-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 0.83rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .input-item {
-  --background: transparent;
-  --padding-start: 0;
-  --padding-end: 0;
+  --background: #f8fafc;
+  --padding-start: 12px;
+  --padding-end: 12px;
   --inner-padding-end: 0;
-  margin-bottom: 2rem;
-  position: relative;
+  --min-height: 50px;
+  border: 1px solid #dbe3ef;
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.input-item::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #800000;
-  transition: width 0.3s ease;
-}
-
-.input-item.ion-focused::after {
-  width: 100%;
-}
-
-ion-label {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #6B7280;
-  transform-origin: top left;
-  transition: all 0.3s ease;
-}
-
-ion-label.ion-label-floating {
-  transform: translateY(0);
-  scale: 1;
-}
-
-ion-label.ion-label-floating.ion-label-up {
-  transform: translateY(-24px);
-  scale: 0.85;
-  color: #800000;
-  font-weight: 600;
+.input-item.ion-focused {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.12);
 }
 
 ion-input {
-  --color: #1F2937;
-  --placeholder-color: #9CA3AF;
-  --placeholder-opacity: 0.7;
-  font-size: 1rem;
-  padding: 0.75rem 0 !important;
-  border-bottom: 2px solid #E5E7EB;
-  transition: border-color 0.3s ease;
+  --color: #0f172a;
+  --placeholder-color: #94a3b8;
+  --placeholder-opacity: 1;
+  font-size: 0.95rem;
 }
 
-ion-input.ion-focused {
-  border-color: #800000;
+.field-help {
+  margin: 8px 2px 0;
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
-.button-group {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.cancel-button,
-.save-button {
-  --border-radius: 12px;
-  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-size: 1.1rem;
+.field-help code {
+  color: #334155;
   font-weight: 600;
-  padding: 0.75rem;
-  flex: 0 0 50%;
-  transition: all 0.3s ease;
+}
+
+.action-row {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.save-button {
+  --background: #0f172a;
+  --background-activated: #111c31;
+  --background-hover: #111c31;
+  --color: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 12px 24px -14px rgba(15, 23, 42, 0.68);
+  text-transform: none;
+  font-weight: 700;
 }
 
 .cancel-button {
-  --background: #FFD700;
-  --color: #1F2937;
+  --color: #334155;
+  --border-color: #cbd5e1;
+  --border-radius: 12px;
+  text-transform: none;
+  font-weight: 700;
 }
 
-.cancel-button:hover {
-  --background: #E6C200;
-  transform: translateY(-2px);
-  --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.cancel-button:active {
-  transform: scale(0.98);
-}
-
-.save-button {
-  --background: #800000;
-  --color: #FFFFFF;
-}
-
-.save-button:hover {
-  --background: linear-gradient(135deg, #800000, #660000);
-  transform: translateY(-2px);
-  --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.save-button:active {
-  transform: scale(0.98);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 600px) {
-  .modal-card {
-    margin: 0 16px;
+@media (max-width: 640px) {
+  .modal-shell {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-  ion-card-header {
-    padding: 1.2rem 1.5rem;
-  }
-
-  ion-card-title {
-    font-size: 1.2rem;
-  }
-
-  ion-card-content {
-    padding: 1rem 1.5rem 1.5rem;
-  }
-
-  .button-group {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .cancel-button,
-  .save-button {
-    flex: 0 0 100%;
-    font-size: 1rem;
-    padding: 0.7rem;
-  }
-
-  ion-title {
-    font-size: 1.3rem;
-  }
-
-  ion-label {
-    font-size: 1rem;
-  }
-
-  ion-label.ion-label-floating.ion-label-up {
-    transform: translateY(-20px);
-    scale: 0.9;
+  .action-row {
+    grid-template-columns: 1fr;
   }
 }
